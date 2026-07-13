@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSettings } from '../hooks/useSettings';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 import type { Settings } from '../types';
 
 const FIELDS: Array<{ key: keyof Settings; label: string; type: 'number' | 'date' }> = [
@@ -38,7 +39,7 @@ export function SettingsPage() {
       <p className="page-subtitle">عدّل القيم هنا، وستنعكس تلقائيًا على كل الصفحات.</p>
       {error && <div className="error-banner">{error}</div>}
       {loading || !form ? (
-        <p>...جاري التحميل</p>
+        <LoadingIndicator />
       ) : (
         <div className="settings-grid">
           {FIELDS.map((f) => (

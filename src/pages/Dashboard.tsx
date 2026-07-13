@@ -3,6 +3,7 @@ import { useSectionTotals } from '../hooks/useSectionTotals';
 import { useItems } from '../hooks/useItems';
 import { StatCard } from '../components/StatCard';
 import { ProgressBar } from '../components/ProgressBar';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 import { money } from '../lib/format';
 import { SECTION_LABELS } from '../types';
 
@@ -40,7 +41,7 @@ export function Dashboard() {
 
       <h3 className="section-title">ملخص الأقسام: المتوقع مقابل المدفوع والمتبقي</h3>
       {loadingTotals ? (
-        <p>...جاري التحميل</p>
+        <LoadingIndicator />
       ) : (
         <div className="table-wrap">
           <table className="data-table">

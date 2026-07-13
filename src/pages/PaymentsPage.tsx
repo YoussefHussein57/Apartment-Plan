@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { usePayments } from '../hooks/usePayments';
 import { useItems } from '../hooks/useItems';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 import { money, dateAr } from '../lib/format';
 
 const METHODS = ['كاش', 'تحويل بنكي', 'فيزا', 'Instapay', 'محفظة إلكترونية'];
@@ -56,7 +57,7 @@ export function PaymentsPage() {
       </div>
 
       {loading ? (
-        <p>...جاري التحميل</p>
+        <LoadingIndicator />
       ) : (
         <div className="table-wrap">
           <table className="data-table">

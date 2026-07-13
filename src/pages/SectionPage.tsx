@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useItems } from '../hooks/useItems';
 import { StatusSelect } from '../components/StatusSelect';
 import { ProgressBar } from '../components/ProgressBar';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 import { money } from '../lib/format';
 import type { Section } from '../types';
 import { SECTION_LABELS, PRIORITY_LABELS } from '../types';
@@ -33,7 +34,7 @@ export function SectionPage({ section }: { section: Section }) {
       <h2 className="page-title">{SECTION_LABELS[section]}</h2>
       {error && <div className="error-banner">{error}</div>}
       {loading ? (
-        <p>...جاري التحميل</p>
+        <LoadingIndicator />
       ) : (
         <div className="table-wrap">
           <table className="data-table">

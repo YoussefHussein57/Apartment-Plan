@@ -336,3 +336,79 @@ body {
   padding: 2px 6px;
   border-radius: 4px;
 }
+
+/* Loading indicator: an apartment building whose windows light up floor by floor */
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 48px 0;
+}
+
+.loading-building {
+  overflow: visible;
+}
+
+.loading-facade {
+  fill: var(--header);
+}
+
+.loading-ground {
+  fill: var(--banner);
+}
+
+.loading-door {
+  fill: var(--banner);
+}
+
+.loading-window {
+  fill: #2a3d42;
+  animation: window-glow 2.4s ease-in-out infinite;
+}
+
+@keyframes window-glow {
+  0%,
+  40%,
+  100% {
+    fill: #2a3d42;
+  }
+  15%,
+  30% {
+    fill: #ffd873;
+  }
+}
+
+.loading-crane-line {
+  stroke: var(--text);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.loading-crane-cable {
+  stroke: var(--text);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+}
+
+.loading-crane {
+  transform-origin: 70px 14px;
+  animation: crane-swing 4s ease-in-out infinite;
+}
+
+@keyframes crane-swing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+
+.loading-label {
+  color: var(--banner);
+  font-size: 14px;
+  font-weight: 600;
+}
