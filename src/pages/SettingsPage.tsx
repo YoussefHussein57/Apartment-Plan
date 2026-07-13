@@ -20,7 +20,8 @@ const CORE_FIELDS: Array<{ key: keyof Settings; label: string; type: 'number' | 
 
 const SAVINGS_FIELDS: Array<{ key: keyof Settings; label: string; type: 'number' }> = [
   { key: 'saved_cash', label: 'الكاش المدّخر (ج.م)', type: 'number' },
-  { key: 'gold_grams', label: 'الذهب المملوك (جرام)', type: 'number' },
+  { key: 'gold_grams_21k', label: 'الذهب عيار 21 (جرام)', type: 'number' },
+  { key: 'gold_grams_24k', label: 'الذهب عيار 24 (جرام)', type: 'number' },
   { key: 'usd_amount', label: 'الدولار المملوك (USD)', type: 'number' },
   { key: 'eur_amount', label: 'اليورو المملوك (EUR)', type: 'number' },
 ];
@@ -71,19 +72,7 @@ export function SettingsPage() {
           <div className="settings-grid">{CORE_FIELDS.map(renderField)}</div>
 
           <h3 className="section-title">المدخرات والأصول</h3>
-          <div className="settings-grid">
-            {SAVINGS_FIELDS.map(renderField)}
-            <label className="settings-field">
-              <span>عيار الذهب</span>
-              <select
-                value={form.gold_karat ?? 21}
-                onChange={(e) => setForm((prev) => ({ ...prev, gold_karat: Number(e.target.value) as 21 | 24 }))}
-              >
-                <option value={21}>عيار 21</option>
-                <option value={24}>عيار 24</option>
-              </select>
-            </label>
-          </div>
+          <div className="settings-grid">{SAVINGS_FIELDS.map(renderField)}</div>
         </>
       )}
       <button className="btn-primary" onClick={handleSave}>

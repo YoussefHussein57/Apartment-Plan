@@ -92,19 +92,20 @@ export function MonthlyPlanPage() {
               <tbody>
                 {(() => {
                   const cash = settings.saved_cash ?? 0;
-                  const gold = settings.gold_grams ?? 0;
-                  const karat = settings.gold_karat ?? 21;
+                  const gold21 = settings.gold_grams_21k ?? 0;
+                  const gold24 = settings.gold_grams_24k ?? 0;
                   const usd = settings.usd_amount ?? 0;
                   const eur = settings.eur_amount ?? 0;
-                  const goldRate = rates ? (karat === 24 ? rates.goldEgp24kPerGram : rates.goldEgp21kPerGram) : null;
-                  const goldValue = goldRate !== null ? gold * goldRate : null;
+                  const gold21Value = rates ? gold21 * rates.goldEgp21kPerGram : null;
+                  const gold24Value = rates ? gold24 * rates.goldEgp24kPerGram : null;
                   const usdValue = rates ? usd * rates.usdToEgp : null;
                   const eurValue = rates ? eur * rates.eurToEgp : null;
-                  const total = cash + (goldValue ?? 0) + (usdValue ?? 0) + (eurValue ?? 0);
+                  const total = cash + (gold21Value ?? 0) + (gold24Value ?? 0) + (usdValue ?? 0) + (eurValue ?? 0);
 
                   const rows = [
                     { label: 'كاش', qty: `${money(cash)}`, rate: '—', value: cash },
-                    { label: `ذهب (عيار ${karat})`, qty: `${gold.toLocaleString('en-US')} جم`, rate: goldRate !== null ? money(goldRate) + '/جم' : '...', value: goldValue },
+                    { label: 'ذهب (عيار 21)', qty: `${gold21.toLocaleString('en-US')} جم`, rate: rates ? money(rates.goldEgp21kPerGram) + '/جم' : '...', value: gold21Value },
+                    { label: 'ذهب (عيار 24)', qty: `${gold24.toLocaleString('en-US')} جم`, rate: rates ? money(rates.goldEgp24kPerGram) + '/جم' : '...', value: gold24Value },
                     { label: 'دولار أمريكي', qty: `${usd.toLocaleString('en-US')} $`, rate: rates ? money(rates.usdToEgp) : '...', value: usdValue },
                     { label: 'يورو', qty: `${eur.toLocaleString('en-US')} €`, rate: rates ? money(rates.eurToEgp) : '...', value: eurValue },
                   ];
