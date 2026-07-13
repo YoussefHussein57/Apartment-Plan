@@ -290,7 +290,8 @@ body {
   color: #6b7a80;
 }
 
-.settings-field input {
+.settings-field input,
+.settings-field select {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 8px 10px;
@@ -411,4 +412,49 @@ body {
   color: var(--banner);
   font-size: 14px;
   font-weight: 600;
+}
+
+/* Savings & assets */
+
+.savings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 28px 0 6px;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--banner);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.btn-link:disabled {
+  color: #9aa5a8;
+  cursor: default;
+}
+
+.text-negative {
+  color: var(--notstarted-fg);
+  font-weight: 700;
+}
+
+/* Remove native number-input spinner arrows for a cleaner look */
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

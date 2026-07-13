@@ -3,7 +3,7 @@ import { useSettings } from '../hooks/useSettings';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 import type { Settings } from '../types';
 
-const FIELDS: Array<{ key: keyof Settings; label: string; type: 'number' | 'date' }> = [
+const CORE_FIELDS: Array<{ key: keyof Settings; label: string; type: 'number' | 'date' }> = [
   { key: 'salary', label: 'المرتب الصافي', type: 'number' },
   { key: 'living_expense', label: 'مصروف المعيشة', type: 'number' },
   { key: 'gam3eya1_installment', label: 'الجمعية الأولى', type: 'number' },
@@ -16,6 +16,13 @@ const FIELDS: Array<{ key: keyof Settings; label: string; type: 'number' | 'date
   { key: 'nov_month', label: 'شهر قبض جمعية نوفمبر', type: 'date' },
   { key: 'furniture_share_pct', label: 'نسبة مساهمة أهل العروسة في العفش', type: 'number' },
   { key: 'plan_start_date', label: 'تاريخ بداية الخطة', type: 'date' },
+];
+
+const SAVINGS_FIELDS: Array<{ key: keyof Settings; label: string; type: 'number' }> = [
+  { key: 'saved_cash', label: 'الكاش المدّخر (ج.م)', type: 'number' },
+  { key: 'gold_grams', label: 'الذهب المملوك (جرام)', type: 'number' },
+  { key: 'usd_amount', label: 'الدولار المملوك (USD)', type: 'number' },
+  { key: 'eur_amount', label: 'اليورو المملوك (EUR)', type: 'number' },
 ];
 
 export function SettingsPage() {
@@ -33,6 +40,25 @@ export function SettingsPage() {
     setTimeout(() => setSaved(false), 2000);
   }
 
+  function renderField(f: { key: keyof Settings; label: string; type: 'number' | 'date' }) {
+    return (
+      <label key={f.key} className="settings-field">
+        <span>{f.label}</span>
+        <input
+          type={f.type}
+          step={f.type === 'number' ? '0.01' : undefined}
+          value={(form[f.key] as string | number | null) ?? ''}
+          onChange={(e) =>
+            setForm((prev) => ({
+              ...prev,
+              [f.key]: f.type === 'number' ? Number(e.target.value) : e.target.value,
+            }))
+          }
+        />
+      </label>
+    );
+  }
+
   return (
     <div>
       <h2 className="page-title">الإعدادات المركزية</h2>
@@ -41,24 +67,24 @@ export function SettingsPage() {
       {loading || !form ? (
         <LoadingIndicator />
       ) : (
-        <div className="settings-grid">
-          {FIELDS.map((f) => (
-            <label key={f.key} className="settings-field">
-              <span>{f.label}</span>
-              <input
-                type={f.type}
-                step={f.key === 'furniture_share_pct' ? '0.01' : undefined}
-                value={(form[f.key] as string | number | null) ?? ''}
-                onChange={(e) =>
-                  setForm((prev) => ({
-                    ...prev,
-                    [f.key]: f.type === 'number' ? Number(e.target.value) : e.target.value,
-                  }))
-                }
-              />
+        <>
+          <div className="settings-grid">{CORE_FIELDS.map(renderField)}</div>
+
+          <h3 className="section-title">المدخرات والأصول</h3>
+          <div className="settings-grid">
+            {SAVINGS_FIELDS.map(renderField)}
+            <label className="settings-field">
+              <span>عيار الذهب</span>
+              <select
+                value={form.gold_karat ?? 21}
+                onChange={(e) => setForm((prev) => ({ ...prev, gold_karat: Number(e.target.value) as 21 | 24 }))}
+              >
+                <option value={21}>عيار 21</option>
+                <option value={24}>عيار 24</option>
+              </select>
             </label>
-          ))}
-        </div>
+          </div>
+        </>
       )}
       <button className="btn-primary" onClick={handleSave}>
         حفظ الإعدادات

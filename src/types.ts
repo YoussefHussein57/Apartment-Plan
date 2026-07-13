@@ -68,4 +68,9 @@ export interface Settings {
   nov_month: string | null;
   furniture_share_pct: number;
   plan_start_date: string | null;
+  saved_cash: number;
+  gold_grams: number;
+  gold_karat: 21 | 24;
+  usd_amount: number;
+  eur_amount: number;
 }

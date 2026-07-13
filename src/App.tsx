@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Dashboard } from './pages/Dashboard';
 import { SectionPage } from './pages/SectionPage';
+import { MonthlyPlanPage } from './pages/MonthlyPlanPage';
 import { PaymentsPage } from './pages/PaymentsPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { isSupabaseConfigured } from './lib/supabase';
@@ -31,6 +32,7 @@ function App() {
           <Route path="/finishing" element={<SectionPage section="finishing" />} />
           <Route path="/furniture" element={<SectionPage section="furniture" />} />
           <Route path="/appliances" element={<SectionPage section="appliances" />} />
+          <Route path="/monthly-plan" element={<MonthlyPlanPage />} />
           <Route path="/payments" element={<PaymentsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Route>

@@ -5,6 +5,7 @@ const NAV = [
   { to: '/finishing', label: 'التشطيب' },
   { to: '/furniture', label: 'العفش' },
   { to: '/appliances', label: 'الأجهزة الكهربائية' },
+  { to: '/monthly-plan', label: 'الخطة الشهرية' },
   { to: '/payments', label: 'المدفوعات' },
   { to: '/settings', label: 'الإعدادات' },
 ];

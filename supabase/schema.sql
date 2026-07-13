@@ -21,7 +21,13 @@ create table settings (
   nov_month date,
   furniture_share_pct numeric not null default 0.5,
   plan_start_date date,
-  constraint settings_single_row check (id = 1)
+  saved_cash numeric not null default 0,
+  gold_grams numeric not null default 0,
+  gold_karat int not null default 21,
+  usd_amount numeric not null default 0,
+  eur_amount numeric not null default 0,
+  constraint settings_single_row check (id = 1),
+  constraint settings_gold_karat check (gold_karat in (21, 24))
 );
 
 create table items (
